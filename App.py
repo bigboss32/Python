@@ -5,6 +5,8 @@ from flask import Flask, render_template, request
 from routes.Subir import Subir_blue
 from routes.Predicion import Predicion_blue
 from routes.Crud import Crud_blue
+from routes.Historia_cvs import historial_blue
+from routes.Cargar import Cargar_cvs_blue
 from flask_sqlalchemy import SQLAlchemy
 
 # creating instance of the class
@@ -17,12 +19,17 @@ SQLAlchemy(app)
 
 @app.route('/')
 def index():
-    return flask.render_template('index.html')
+    return flask.render_template('index3.html')
+
+@app.route('/a')
+def a():
+    return flask.render_template('simple.html')
 
 app.register_blueprint(Subir_blue)
 app.register_blueprint(Predicion_blue)
 app.register_blueprint(Crud_blue)
-
+app.register_blueprint(historial_blue)
+app.register_blueprint(Cargar_cvs_blue)
 
 
 
