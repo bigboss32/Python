@@ -1,7 +1,7 @@
 
 
-import flask
-from flask import Flask, render_template, request, flash
+
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 
 from routes.Subir import Subir_blue
@@ -19,7 +19,7 @@ from models.entities.user import User
 # creating instance of the class
 app = Flask(__name__)
 db = MySQL(app)
-@app.route('/')
+@app.route('/resgitro')
 def prueba():
        
         fullname = "carlos"
@@ -35,14 +35,14 @@ def prueba():
 
 
 
-@app.route('/aa', methods=['GET', 'POST'])
-def index():
+@app.route('/login', methods=['GET', 'POST'])
+def login():
     if request.method == 'POST':
      u = User(0, request.form['correo'], request.form['contra'])
-     print(u.Nombre)
+     print(u.Nombre +"hola")
      logged_user = ModelUser.login(db, u)
      
-     print(logged_user)
+   
      if logged_user != None:
         if logged_user.contrase==True:
             return render_template("index3.html")
