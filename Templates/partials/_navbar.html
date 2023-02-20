@@ -6,11 +6,11 @@
 
 
   <div class="sidebar">
-
+    
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-
       <div class="info">
-        <a href="#" class="d-block">Miguel Garzon</a>
+        <a href="#" class="d-block"> {{ current_user.fullname }}</a>
+        <a class="btn btn-secondary" href="/logout">Cerrar sesion</a>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
 
 
         <li class="nav-item">
-          <a href="/" class="nav-link">
+          <a href="/home" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>
               Menu

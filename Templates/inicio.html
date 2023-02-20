@@ -17,16 +17,18 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
+ 
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="/Inicio_de_sesion" class="h1"><b>Proyecto</b>final</a>
+      <a href="/login" class="h1"><b>Proyecto</b>final</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Inicio de sesion</p>
-
+    
       <form action="/login" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="correo">
+          <input type="email" class="form-control" placeholder="Email" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -34,7 +36,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="contra">
+          <input type="password" class="form-control" placeholder="Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -51,6 +53,15 @@
           </div>
           <!-- /.col -->
         </div>
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
       </form>
 
     

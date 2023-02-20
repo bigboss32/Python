@@ -25,6 +25,7 @@
       <p class="login-box-msg"> nuevo miembro</p>
 
       <form action="/registro" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Full name" name="nom">
           <div class="input-group-append">
