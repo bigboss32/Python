@@ -9,8 +9,6 @@ db = MySQL()
 
 sesion_blue=Blueprint('Inicio_de_sesion',__name__)
 
-
-from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 
 from flask_login import LoginManager, login_user, logout_user, login_required

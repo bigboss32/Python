@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 
 from routes.Subir import Subir_blue
-from routes.Predicion import Predicion_blue
+from routes.Datos import datos_blue
 from routes.Registrarse import resgitro_blue
 from routes.Historia_cvs import historial_blue
 from routes.Cargar import Cargar_cvs_blue
@@ -38,7 +38,7 @@ def index():
 
 
 app.register_blueprint(Subir_blue)
-app.register_blueprint(Predicion_blue)
+app.register_blueprint(datos_blue)
 app.register_blueprint(resgitro_blue)
 app.register_blueprint(historial_blue)
 app.register_blueprint(Cargar_cvs_blue)
