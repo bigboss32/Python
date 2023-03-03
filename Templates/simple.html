@@ -60,19 +60,20 @@
                     <th>fecha</th>
                     <th>extension</th>
                     <th>version</th>
-                    <th>año</th>
-                   
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                    <td>prueba uno</td>
-                    <td>02-02-2023
-                    </td>
+                   
+                  {% for archivos in archivos %}
+                   
+                    <td>{{archivos}}</td>
+                    <td>{{fecha}}</td>
                     <td>cvs</td>
                     <td> 1.0</td>
-                    <td>2023</td>
+                      
                   </tr>
+                  {%endfor%}
                   
                   </tfoot>
                 </table>
