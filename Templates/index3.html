@@ -55,7 +55,7 @@
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3>{{nuevos}}</h3>
 
                   <p>nuevos </p>
                 </div>
@@ -70,7 +70,7 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+                  <h3>{{abandono_in}}<sup style="font-size: 20px">%</sup></h3>
 
                   <p>indice de abandono</p>
                 </div>
@@ -85,14 +85,14 @@
 
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3>{{catidad_estu}}</h3>
 
                   <p>estudiantes</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
 
@@ -100,14 +100,14 @@
 
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>65</h3>
+                  <h3>{{abandonos}}</h3>
 
                   <p>Abandono</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
               </div>
 
             </div>
@@ -119,30 +119,21 @@
                     <th>ID</th>
                     <th>User</th>
                     <th>Date</th>
+                    <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
+                  {% for data in data %}
+
                   <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>11-7-2014</td>
+                    <td>{{data.id}}</td>
+                    <td>{{data.nombre}}</td>
+                    <td>{{data.prediccion}}</td>
                     <td><span class="tag tag-success">Approved</span></td>
                   
                   </tr>
-                  <tr>
-                    <td>219</td>
-                    <td>Alexander Pierce</td>
-                    <td>11-7-2014</td>
-                    <td><span class="tag tag-warning">Pending</span></td>
+                  {%endfor%}
                   
-                  </tr>
-                  <tr>
-                    <td>657</td>
-                    <td>Bob Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="tag tag-primary">Approved</span></td>
-                   
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -232,38 +223,21 @@
   </footer>
   </div>
 
-  <!-- ./wrapper -->
-
-  <!-- REQUIRED SCRIPTS -->
-
-  <!-- jQuery -->
   <script src="static\plugins\jquery\jquery.min.js"></script>
-  <!-- Bootstrap -->
+
   <script src="static\plugins\bootstrap\js\bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE -->
+
   <script src="static\dist\js\adminlte.js"></script>
 
-  <!-- OPTIONAL SCRIPTS -->
+
   <script src="static\plugins\chart.js\Chart.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
+
   <script src="static\dist\js\demo.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+
   <script src="static\dist\js\pages\dashboard3.js"></script>
 
-  <!-- Bootstrap 4 -->
 
  
-  <!-- Page specific script -->
-
-  <script>
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-    });
-  </script>
 
 
 

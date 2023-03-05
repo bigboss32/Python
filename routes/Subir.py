@@ -54,4 +54,4 @@ def Subir():
             ))
             cursor.connection.commit()
       
-    return redirect("/datos")
+    return redirect("/Historia_cvs")

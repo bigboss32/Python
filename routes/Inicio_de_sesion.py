@@ -35,7 +35,7 @@ def login():
         if logged_user != None:
             if logged_user.password:
                 login_user(logged_user)
-                return render_template("index3.html")
+                return redirect("/datos")
             else:
                 flash("Invalid password...")
                 return render_template('inicio.html')
