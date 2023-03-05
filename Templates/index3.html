@@ -116,10 +116,10 @@
               <table class="table table-head-fixed text-nowrap">
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Date</th>
-                    <th>Date</th>
+                    <th>Item</th>
+                    <th>Nombre</th>
+                    <th>Prediccion</th>
+                    <th>Resultado</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -129,7 +129,7 @@
                     <td>{{data.id}}</td>
                     <td>{{data.nombre}}</td>
                     <td>{{data.prediccion}}</td>
-                    <td><span class="tag tag-success">Approved</span></td>
+                    <td><span class="tag tag-success">{{data.resultado}}</span></td>
                   
                   </tr>
                   {%endfor%}
@@ -138,11 +138,12 @@
               </table>
             </div>
           </div>
+          
             <div class="content-wrapper">
               <div class="card card-danger">
                 <div class="card-header">
 
-                  <h3 class="card-title">Donut Chart</h3>
+                  <h3 class="card-title">Grafico</h3>
 
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -242,6 +243,12 @@
 
 
   <script>
+   
+    abandono={{a|tojson }}
+    graduado={{g|tojson }}
+   
+    numero_abandono=abandono[11]+""+abandono[12]
+    numero_graduado=graduado[11]+""+graduado[12]
     $(function () {
       var areaChartOptions = {
         maintainAspectRatio: false,
@@ -266,16 +273,16 @@
       var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
       var donutData = {
         labels: [
-          'carrera 1',
-          'carrera 2',
-          'carrera 3',
-          'carrera 4',
+          'Abandono',
+          'Graduados',
+         
          
         ],
         datasets: [
           {
-            data: [700, 500, 400, 600],
-            backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef'],
+           
+            data: [numero_abandono, numero_graduado],
+            backgroundColor: ['#f56954', '#00a65a'],
           }
         ]
       }

@@ -53,5 +53,7 @@ def Subir():
             a.numero_entrega,a.nombre,a.cedula,a.edad_de_ingreso,a.Actualmente_trabaja,a.Tipo_de_población_a_la_que_pertenece,a.ESTADO_CIVIL,a.Cómo_financia_sus_estudios,a.CIRCUNSCRIPCION,a.Dispone_de_un_computador_permanentemente,a.Posee_conexión_permanente_a_internet,a.sexo,a.estrato,final
             ))
             cursor.connection.commit()
-      
-    return redirect("/Historia_cvs")
+            return redirect("//Historia_cvs")
+    else:
+
+            return redirect("/datos")
