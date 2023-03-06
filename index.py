@@ -1,7 +1,7 @@
 from App import app
 from config import config
 from flask_wtf.csrf import CSRFProtect
-from flask import Flask, render_template, request, redirect,url_for
+from flask import redirect,url_for
 
 csrf = CSRFProtect()
 def status_401(error):

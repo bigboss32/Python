@@ -37,7 +37,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Home/{{informe}}</a></li>
                 <li class="breadcrumb-item active"> v1</li>
               </ol>
             </div><!-- /.col -->
@@ -87,7 +87,7 @@
                 <div class="inner">
                   <h3>{{catidad_estu}}</h3>
 
-                  <p>estudiantes</p>
+                  <p>estudiantes totales</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -165,37 +165,27 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Task</th>
-                      <th>Progress</th>
-                      <th style="width: 40px">Label</th>
+                      <th style="width: 30px">#</th>
+                      <th>Carrera</th>
+                      
+                      <th style="width: 60x">Cantidad estudiantes</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1.</td>
-                      <td>estudiantes inciados</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-danger">55%</span></td>
+                      {% for datoscarrea in datoscarrea %}
+
+                      <td>{{datoscarrea.id}}</td>
+                      <td>{{datoscarrea.nombre}}</td>
+                      
+                      <td><span class="badge bg-danger">{{datoscarrea.cantidad}}</span></td>
                     </tr>
                     <tr>
-                      <td>2.</td>
-                      <td>estudiantes finalizados</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-warning">70%</span></td>
-                    </tr>
+                      {%endfor%}
                    
                   </tbody>
                 </table>
-
+                
               </div>
 
             </div>
@@ -244,11 +234,13 @@
 
   <script>
    
-    abandono={{a|tojson }}
-    graduado={{g|tojson }}
+    var objuno={{a|tojson }}
+    var onjdos={{g|tojson }}
+
    
-    numero_abandono=abandono[11]+""+abandono[12]
-    numero_graduado=graduado[11]+""+graduado[12]
+    numero_abandono=JSON.parse(objuno)
+    numero_graduado=JSON.parse(onjdos)
+
     $(function () {
       var areaChartOptions = {
         maintainAspectRatio: false,
@@ -281,7 +273,7 @@
         datasets: [
           {
            
-            data: [numero_abandono, numero_graduado],
+            data: [numero_abandono['salary'],numero_graduado['salary']],
             backgroundColor: ['#f56954', '#00a65a'],
           }
         ]

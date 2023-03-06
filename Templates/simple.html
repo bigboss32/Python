@@ -60,19 +60,34 @@
                     <th>fecha</th>
                     <th>extension</th>
                     <th>version</th>
+                    <th>Acciones</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                   
+                    
                   {% for archivos in archivos %}
-                   
+                    
                     <td>{{archivos.nombre}}</td>
                     <td>{{archivos.fecha}}</td>
                     <td>cvs</td>
                     <td> 1.0</td>
+                    <td>
+                    <form action="/individual" method="POST">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    
+                      <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name" name="analizar">
+                      <input type="submit" value= Analizar  class="btn btn-success" >
                       
-                  </tr>
+                    </form>
+                    <form action="/Eliminar" method="POST">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                      <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name" name="eliminar">
+                      <input type="submit" value=Eliminar class="btn btn-danger" >
+                    
+                    </form>
+                    </td> 
+                    </tr>
                   {%endfor%}
                   
                   </tfoot>

@@ -1,11 +1,13 @@
-from flask import Blueprint,request,render_template
+from flask import Blueprint,render_template
 import os
 import time
 from models.entities.Archivo import Tree
+from flask_login import login_required
 historial_blue=Blueprint('Historia_cvs',__name__)
 
 
 @historial_blue.route('/Historia_cvs')
+@login_required
 def historial():
         a=0
         ejemplo_dir = 'Archivo'
@@ -17,8 +19,6 @@ def historial():
                 ti_c = os.path.getctime(ejemplo_dir+"/"+fichero)
                 c_ti = time.ctime(ti_c)
                 historial_temp=Tree(fichero,c_ti)
-                print(historial_temp.nombre)
-                print(historial_temp.fecha)
                 archivos.append(historial_temp)
 
                

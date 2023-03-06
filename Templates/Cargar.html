@@ -52,11 +52,12 @@
                 <form action="/Subir" method="post" enctype="multipart/form-data">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <div class="mb-3">
-                    <label for="formFile" class="form-label">Subir archivo</label>
+                    <label for="formFile" class="form-select">Subir archivo</label>
                     <input class="form-control" type="file" id="subirarchivo" name="subirarchivo" >
+                    
                   </div>
                   
-                  <input type="submit" type="color" class="form-control form-control-color">
+                  <input type="submit" type="color" class="btn btn-success">
                 </form>
 
               </div>

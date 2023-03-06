@@ -1,23 +1,17 @@
-
-
-
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template
 from flask_mysqldb import MySQL
-
 from routes.Subir import Subir_blue
 from routes.Datos import datos_blue
 from routes.Registrarse import resgitro_blue
 from routes.Historia_cvs import historial_blue
 from routes.Cargar import Cargar_cvs_blue
 from routes.Inicio_de_sesion import sesion_blue
-#
+from routes.Enviar_datos_indivi import Enviar_datos_indi_bleu
 from models.ModelUser import ModelUser
-#
 from models.entities.User import User
 from flask_wtf.csrf import CSRFProtect
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager
 
-# creating instance of the class
 app = Flask(__name__)
 db = MySQL(app)
 
@@ -32,11 +26,7 @@ def index():
     print("hola")
     return render_template("inicio.html")
 
-
-
-
-
-
+app.register_blueprint(Enviar_datos_indi_bleu)
 app.register_blueprint(Subir_blue)
 app.register_blueprint(datos_blue)
 app.register_blueprint(resgitro_blue)

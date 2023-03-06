@@ -1,25 +1,15 @@
 from flask import Blueprint,request,render_template, redirect, url_for, flash
-from models.entities.User import User
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import  login_user, logout_user, login_required
 from flask_mysqldb import MySQL
 from models.ModelUser import ModelUser
+from models.entities.User import User
+
 db = MySQL()
 
 
 
 sesion_blue=Blueprint('Inicio_de_sesion',__name__)
 
-from flask_mysqldb import MySQL
-
-from flask_login import LoginManager, login_user, logout_user, login_required
-
-from config import config
-
-# Models:
-from models.ModelUser import ModelUser
-
-# Entities:
-from models.entities.User import User
 
 
 
@@ -28,8 +18,6 @@ from models.entities.User import User
 @sesion_blue.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # print(request.form['username'])
-        # print(request.form['password'])
         user = User(0, request.form['username'], request.form['password'])
         logged_user = ModelUser.login(db, user)
         if logged_user != None:
@@ -38,9 +26,9 @@ def login():
                 return redirect("/datos")
             else:
                 flash("Invalid password...")
-                return render_template('inicio.html')
+                return render_template('inicio.html',message=flash)
         else:
-            flash("User not found...")
+            usario="usuario no encontrado"
             return render_template('inicio.html')
     else:
         return render_template('inicio.html')
