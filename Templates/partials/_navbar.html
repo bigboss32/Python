@@ -8,9 +8,15 @@
   <div class="sidebar">
     
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+
       <div class="info">
+        
+        {% if current_user.fullname  in current_user.fullname%}
         <a href="#" class="d-block"> {{ current_user.fullname }}</a>
         <a class="btn btn-danger" href="/logout">Cerrar sesion</a>
+        {%else%}
+        <a class="btn btn-danger" href="/logout">login</a>
+        {% endif %}
       </div>
     </div>
 
@@ -37,18 +43,13 @@
             <p>
               Perfil
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">2</span>
+              <span class="badge badge-info right"></span>
             </p>
           </a>
           <ul class="nav nav-treeview">
+           
             <li class="nav-item">
-              <a href="pages/layout/top-nav.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Contraseña</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+              <a href="/Historia_usuarios" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Usuario</p>
               </a>

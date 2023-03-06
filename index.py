@@ -1,12 +1,12 @@
 from App import app
 from config import config
 from flask_wtf.csrf import CSRFProtect
-from flask import redirect,url_for
+from flask import redirect,url_for,render_template
 
 csrf = CSRFProtect()
 def status_401(error):
 
-    return redirect(url_for('login'))
+    return render_template("404.html")
 
 
 def status_404(error):

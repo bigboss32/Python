@@ -11,7 +11,7 @@ def regsitro():
         if request.form['contra']==request.form['contrados']:
             
             cursor = db.connection.cursor()
-            cursor.execute('INSERT INTO user (username, password, fullname) VALUES (%s, %s, %s)', (request.form['nom'],generate_password_hash(request.form['contra']),request.form['correo']))
+            cursor.execute('INSERT INTO user (username, password, fullname) VALUES (%s, %s, %s)', (request.form['correo'],generate_password_hash(request.form['contra']),request.form['nom']))
             cursor.connection.commit()
             return render_template('inicio.html')
         else:

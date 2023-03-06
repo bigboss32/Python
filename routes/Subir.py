@@ -1,4 +1,4 @@
-from flask import Blueprint, request,redirect
+from flask import Blueprint, request,redirect,render_template
 import os
 from werkzeug.utils import secure_filename
 from flask_login import login_required
@@ -25,9 +25,14 @@ def allowed_file(file):
 
 
 @Subir_blue.route('/Subir', methods=['POST'])
+    
 @login_required
 def Subir():
-    
+    global prediction
+    global error
+    prediction="Error en el formato de los datos"
+    error="No envio ningun archivo valido"
+    try:
 
         file = request.files["subirarchivo"]
  
@@ -64,7 +69,8 @@ def Subir():
                 cursor.connection.commit()
                 return redirect("/Historia_cvs")
             else:
-            
-
                 return redirect("/datos")
-    
+    except ValueError:
+            prediction="Error en el formato de los datos"
+    return render_template("500.html", prediction=prediction,error=error)
+       

@@ -10,6 +10,7 @@ Enviar_datos_indi_bleu = Blueprint('Enviar_datos_indivi', __name__)
 db = MySQL()
 
 @Enviar_datos_indi_bleu.route('/individual',methods=['GET', 'POST'])
+
 @login_required
 def informe_indiv():
     print(request.form['analizar'])
@@ -39,7 +40,7 @@ def informe_indiv():
     datos_cantidad=cantidad.loc[0, 'count(*)']
     Datafreresultadodos =pandas.read_sql("SELECT  Carrera FROM registro",db.connection)
     datos_abandono=abandono.loc[0,'count(*)']
-    indice_abandono=(datos_cantidad/datos_abandono)/100
+    indice_abandono=(100*datos_abandono)/datos_cantidad
     datos_graduado=graduado.loc[0,'count(*)']
 
     numero=0

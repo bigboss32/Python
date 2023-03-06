@@ -4,6 +4,7 @@ from routes.Subir import Subir_blue
 from routes.Datos import datos_blue
 from routes.Registrarse import resgitro_blue
 from routes.Historia_cvs import historial_blue
+from routes.Historial_usuarios import historial_usuarios_blue
 from routes.Cargar import Cargar_cvs_blue
 from routes.Inicio_de_sesion import sesion_blue
 from routes.Enviar_datos_indivi import Enviar_datos_indi_bleu
@@ -33,6 +34,7 @@ app.register_blueprint(resgitro_blue)
 app.register_blueprint(historial_blue)
 app.register_blueprint(Cargar_cvs_blue)
 app.register_blueprint(sesion_blue)
+app.register_blueprint(historial_usuarios_blue)
 
 
 
