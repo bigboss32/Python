@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Proyecto</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="static\plugins\fontawesome-free\css\all.min.css">
   <!-- DataTables -->
@@ -16,107 +18,110 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="static\dist\css\adminlte.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
-  <!-- Navbar -->
+  <div class="wrapper">
+    <!-- Navbar -->
 
-  <!-- /.navbar -->
+    <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  {%include('partials/_navbar.html')%}
+    <!-- Main Sidebar Container -->
+    {%include('partials/_navbar.html')%}
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Historial CVS</h1>
-          </div>
-          <div class="col-sm-6">
-           
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-          
-            <!-- /.card -->
-
-            <div class="card">
-            
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Archivo</th>
-                    <th>fecha</th>
-                    <th>extension</th>
-                    <th>version</th>
-                    <th>Acciones</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    
-                  {% for archivos in archivos %}
-                    
-                    <td>{{archivos.nombre}}</td>
-                    <td>{{archivos.fecha}}</td>
-                    <td>cvs</td>
-                    <td> 1.0</td>
-                    <td>
-                    <form action="/individual" method="POST">
-                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    
-                      <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name" name="analizar">
-                      <input type="submit" value= Analizar  class="btn btn-success" >
-                      
-                    </form>
-                    <form action="/Eliminar" method="POST">
-                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                      <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name" name="eliminar">
-                      <input type="submit" value=Eliminar class="btn btn-danger" >
-                    
-                    </form>
-                    </td> 
-                    </tr>
-                  {%endfor%}
-                  
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Historial CVS</h1>
             </div>
-            <!-- /.card -->
+            <div class="col-sm-6">
+
+            </div>
           </div>
-          <!-- /.col -->
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+
+              <!-- /.card -->
+
+              <div class="card">
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Archivo</th>
+                        <th>fecha</th>
+                        <th>extension</th>
+                        <th>version</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+
+                        {% for archivos in archivos %}
+
+                        <td>{{archivos.nombre}}</td>
+                        <td>{{archivos.fecha}}</td>
+                        <td>cvs</td>
+                        <td> 1.0</td>
+                        <td>
+                          <form action="/individual" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                            <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name"
+                              name="analizar">
+                            <input type="submit" value=Analizar class="btn btn-success">
+
+                          </form>
+                          <form action="/Eliminar" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name"
+                              name="eliminar">
+                            <input type="submit" value=Eliminar class="btn btn-danger">
+
+                          </form>
+                        </td>
+                      </tr>
+                      {%endfor%}
+
+                      </tfoot>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
         </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
   </div>
-  <!-- /.content-wrapper -->
- 
+  <!-- ./wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-
-<!-- jQuery -->
+  <!-- jQuery -->
   <!-- jQuery -->
   <script src="static\plugins\jquery\jquery.min.js"></script>
   <!-- Bootstrap -->
@@ -150,23 +155,24 @@
   <script src="static\dist\js\adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="static\dist\js\demo.js"></script>
-<!-- Page specific script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+  <!-- Page specific script -->
+  <script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
     });
-  });
-</script>
+  </script>
 </body>
+
 </html>

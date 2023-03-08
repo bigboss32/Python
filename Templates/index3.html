@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inteligenci artificial| miguel 3</title>
+  <title>Inteligenci artificial| </title>
 
 
   <link rel="stylesheet"
@@ -26,40 +26,63 @@
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+      </symbol>
+      <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+          d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+      </symbol>
+      <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+          d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+      </symbol>
+    </svg>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       {%include('partials/_navbar.html')%}
     </aside>
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Prediccion</h1>
-            </div><!-- /.col -->
+              <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                  <use xlink:href="#check-circle-fill" />
+                </svg>
+                <div>
+                  {% if informe in informe%}
+                  <h1 class="m-0">Predicción de el informe {{informe}}</h1>
+                  {%else%}
+                  <h1 class="m-0">Predicción de el informe general</h1>
+                  {% endif %}
+                </div>
+              </div>
+
+            </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home/{{informe}}</a></li>
-                <li class="breadcrumb-item active"> v1</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
 
-      <!-- Main content -->
+                <div class="alert alert-primary" role="alert">
+                  Inicio/{{informe}}
+                </div>
+
+
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
       <section class="content">
         <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-lg-3 col-6">
-              <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>{{nuevos}}</h3>
-
-                  <p>nuevos </p>
+                  <h3>{{catidad_estu}}</h3>
+                  <p>Estudiantes totales </p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -67,14 +90,14 @@
                 <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
-            <!-- ./col -->
+
             <div class="col-lg-3 col-6">
-              <!-- small box -->
+
               <div class="small-box bg-success">
                 <div class="inner">
                   <h3>{{abandono_in}}<sup style="font-size: 20px">%</sup></h3>
 
-                  <p>indice de abandono</p>
+                  <p>Indice de abandono</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -82,14 +105,13 @@
                 <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
-            <!-- ./col -->
             <div class="col-lg-3 col-6">
 
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>{{catidad_estu}}</h3>
+                  <h3> {{graduado}}</h3>
 
-                  <p>estudiantes totales</p>
+                  <p>Graduados</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -113,39 +135,60 @@
               </div>
 
             </div>
-         <div class="card">
-            <div class="card-body table-responsive p-0" style="height: 200px; ">
-              <table class="table table-head-fixed text-nowrap">
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Nombre</th>
-                    <th>Prediccion</th>
-                    <th>Resultado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for data in data %}
+            <div class="row">
 
-                  <tr>
-                    <td>{{data.id}}</td>
-                    <td>{{data.nombre}}</td>
-                    <td>{{data.prediccion}}</td>
-                    <td><span class="tag tag-success">{{data.resultado}}</span></td>
-                  
-                  </tr>
-                  {%endfor%}
-                  
-                </tbody>
-              </table>
+
+              <div class="card-body">
+                <div class="card">
+                  <div class="card-body table-responsive p-0" style="height: 600px; ">
+                    <table class="table table-head-fixed text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Nombre</th>
+                          <th>Cedula</th>
+                          <th>Resultado</th>
+                          <th>Carrera</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for data in data %}
+
+                        <tr>
+                          <td>{{data.id}}</td>
+                          <td>{{data.nombre}}</td>
+                          <td>{{data.cedula}}</td>
+                          
+                          <td>
+                            {% if data.prediccion ==0%}
+                              <div class="alert alert-secondary" role="alert">
+                                Abandono
+                              </div>
+                            {%else%}
+                              <div class="alert alert-success" role="alert">
+                                graduado
+                              </div>
+                            {% endif %}
+
+
+                          </td>
+                          
+                          <td>{{data.Carrera}}</td>
+                        </tr>
+                        {%endfor%}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          
+
             <div class="content-wrapper">
               <div class="card card-danger">
                 <div class="card-header">
 
-                  <h3 class="card-title">Grafico</h3>
+                  <h3 class="card-title">Grafico Abandono contra Graduado</h3>
 
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -158,36 +201,58 @@
                 </div>
                 <div class="card-body">
                   <canvas id="donutChart"
-                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    style="min-height: 250px; height: 250px; max-height: 200px; max-width: 100%;"></canvas>
                 </div>
               </div>
 
+              <div class="card-body">
+                <div class="card">
+                  <div class="card-body table-responsive p-0" style="height: 300px; ">
+                    <div class="card-body p-0">
+                      <table class="table table-head-fixed text-nowrap">
+                        <thead>
+                          <tr>
+                            <th style="width: 30px">#</th>
+                            <th>Carrera</th>
 
-              <div class="card-body p-0">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th style="width: 30px">#</th>
-                      <th>Carrera</th>
-                      
-                      <th style="width: 60x">Cantidad estudiantes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      {% for datoscarrea in datoscarrea %}
+                            <th style="width: 10x">Cantidad de estudiantes</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            {% for datoscarrea in datoscarrea %}
 
-                      <td>{{datoscarrea.id}}</td>
-                      <td>{{datoscarrea.nombre}}</td>
-                      
-                      <td><span class="badge bg-danger">{{datoscarrea.cantidad}}</span></td>
-                    </tr>
-                    <tr>
-                      {%endfor%}
-                   
-                  </tbody>
-                </table>
-                
+                            <td>
+                              <div class="alert alert-info" role="alert">
+                                {{datoscarrea.id}}
+                              </div>
+
+                            </td>
+
+                            <td>
+                              <div class="alert alert-info" role="alert">
+
+                                {{datoscarrea.nombre}}
+
+                              </div>
+                            </td>
+
+                            <td>
+                              <div class="alert alert-danger" role="alert">
+                                {{datoscarrea.cantidad}}
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            {%endfor%}
+
+                        </tbody>
+                      </table>
+
+                    </div>
+
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -206,10 +271,8 @@
 
 
 
-  <!-- Main Footer -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
+
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.2.0
     </div>
@@ -230,18 +293,18 @@
   <script src="static\dist\js\pages\dashboard3.js"></script>
 
 
- 
+
 
 
 
   <script>
-   
-    var objuno={{a|tojson }}
-    var onjdos={{g|tojson }}
 
-   
-    numero_abandono=JSON.parse(objuno)
-    numero_graduado=JSON.parse(onjdos)
+    var objuno = {{ a| tojson }}
+    var onjdos = {{ g| tojson }}
+
+
+    numero_abandono = JSON.parse(objuno)
+    numero_graduado = JSON.parse(onjdos)
 
     $(function () {
       var areaChartOptions = {
@@ -269,13 +332,13 @@
         labels: [
           'Abandono',
           'Graduados',
-         
-         
+
+
         ],
         datasets: [
           {
-           
-            data: [numero_abandono['salary'],numero_graduado['salary']],
+
+            data: [numero_abandono['salary'], numero_graduado['salary']],
             backgroundColor: ['#f56954', '#00a65a'],
           }
         ]

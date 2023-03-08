@@ -25,6 +25,7 @@ def datos():
                abandono=pandas.read_sql("select count(*) FROM registro WHERE FKresultado = 0 ",db.connection)
                graduado=pandas.read_sql("select count(*) FROM registro WHERE FKresultado = 1 ",db.connection)
                carreradatoorginal=pandas.read_sql("select Carrera FROM registro ",db.connection)
+               datosgenreal=pandas.read_sql("SELECT  idRegistro,cedula,nombre,Carrera,FKresultado FROM registro",db.connection)
                carreradato=carreradatoorginal.drop_duplicates()
                
                cuenta_carrera = carreradatoorginal['Carrera'].value_counts()
@@ -56,19 +57,17 @@ def datos():
                
                for i in range(len(Datafremenombre)):
                     numero=numero+1
-                    if Datafreresultado.loc[i,'FKresultado']==0:
-                         Persona.append(persona(numero,Datafremenombre.loc[i,'nombre'],Datafreresultado.loc[i,'FKresultado'],"Abandono",Datafreresultadodos.loc[i,'Carrera']))
+                    
+                    Persona.append(persona(numero,datosgenreal.loc[i,'nombre'],datosgenreal.loc[i,'FKresultado'],datosgenreal.loc[i,'cedula'],datosgenreal.loc[i,'Carrera']))
                          
                               
-                    else:
-                         Persona.append(persona(numero,Datafremenombre.loc[i,'nombre'],Datafreresultado.loc[i,'FKresultado'],"Graduado",Datafreresultadodos.loc[i,'Carrera']))
-                    
+              
                nuevos=datos_estudiantes_nuevos
                     
 
                jsonabandono = json.dumps({'salary': int(datos_abandono)})
                jsongraduado = json.dumps({'salary': int(datos_graduado)})
-               return render_template("index3.html",data=Persona,catidad_estu=datos_cantidad,abandonos=datos_abandono,abandono_in=indice_abandono,nuevos=nuevos,a=jsonabandono,g=jsongraduado,datoscarrea=Carrera)
+               return render_template("index3.html",data=Persona,catidad_estu=datos_cantidad,abandonos=datos_abandono,graduado=datos_graduado,abandono_in=indice_abandono,nuevos=nuevos,a=jsonabandono,g=jsongraduado,datoscarrea=Carrera)
           except ValueError:
                prediction="Error en el formato de los datos"
           return render_template("404.html", prediction=prediction,error=error)
