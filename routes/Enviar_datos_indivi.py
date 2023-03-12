@@ -70,10 +70,7 @@ def informe_indiv():
     jsongraduado = json.dumps({'salary': int(datos_graduado)})
     return render_template("index3.html",data=Persona,catidad_estu=datos_cantidad,abandonos=datos_abandono,graduado=datos_graduado,abandono_in=indice_abandono,nuevos=nuevos,a=jsonabandono,g=jsongraduado,informe=nombre,datoscarrea=Carrera)
     
-@Enviar_datos_indi_bleu.route('/individual_solo_graduados',methods=['GET', 'POST'])
 
-@login_required
-def informe_indiv_solo_graduados():
     print(request.form['abandono'])
     nombre=request.form['abandono']
   

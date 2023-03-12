@@ -8,6 +8,7 @@ from routes.Historial_usuarios import historial_usuarios_blue
 from routes.Cargar import Cargar_cvs_blue
 from routes.Inicio_de_sesion import sesion_blue
 from routes.Enviar_datos_indivi import Enviar_datos_indi_bleu
+from routes.Datos_pregunta import Datos_pregunta_bleu
 from models.ModelUser import ModelUser
 from models.entities.User import User
 from flask_wtf.csrf import CSRFProtect
@@ -26,7 +27,7 @@ def load_user(id):
 def index():
     print("hola")
     return render_template("inicio.html")
-
+app.register_blueprint(Datos_pregunta_bleu)
 app.register_blueprint(Enviar_datos_indi_bleu)
 app.register_blueprint(Subir_blue)
 app.register_blueprint(datos_blue)
