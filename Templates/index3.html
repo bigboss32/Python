@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inteligenci artificial| </title>
+  <title>Inteligenci artificial|</title>
 
 
   <link rel="stylesheet"
@@ -18,6 +18,10 @@
   <link rel="stylesheet" href="static\plugins\datatables-bs4\css\dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="static\plugins\datatables-responsive\css\responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="static\plugins\datatables-buttons\css\buttons.bootstrap4.min.css">
+  <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css">
+
+
+
 
 </head>
 
@@ -135,20 +139,48 @@
               </div>
 
             </div>
+
+
+
+
+
+
+
             <div class="row">
 
-
               <div class="card-body">
+                <div class="row justify-content-between">
+                  <div class="col-1">
+                   
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                      <input type="hidden" value={{informe}} class="form-control" placeholder="Full name"
+                              name="abandono">
+                      <input type="submit" value="Posible Abandono" class="btn btn-secondary">
+                    
+                  </div>
+                  <div class="col-8">
+                  
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                      <input type="hidden" value="graduado" class="form-control" placeholder="Full name" name="g">
+                      <input type="submit" value="Posible graduado" class="btn btn-success">
+                   
+                  </div>
+
+                </div>
                 <div class="card">
-                  <div class="card-body table-responsive p-0" style="height: 600px; ">
-                    <table class="table table-head-fixed text-nowrap">
+
+
+                  <div class="card-body table-responsive p-0" style="height: 550px; ">
+                    <table id="myTable" class="table table-head-fixed text-nowrap">
                       <thead>
                         <tr>
                           <th>#</th>
                           <th>Nombre</th>
-                          <th>Cedula</th>
                           <th>Resultado</th>
-                          <th>Carrera</th>
+                          <th>Accion</th>
+
                         </tr>
                       </thead>
                       <tbody>
@@ -157,23 +189,32 @@
                         <tr>
                           <td>{{data.id}}</td>
                           <td>{{data.nombre}}</td>
-                          <td>{{data.cedula}}</td>
-                          
+
+
                           <td>
+                            
                             {% if data.prediccion ==0%}
-                              <div class="alert alert-secondary" role="alert">
-                                Abandono
-                              </div>
+                            <div class="alert alert-secondary" role="alert">
+                              Abandono
+                            </div>
                             {%else%}
-                              <div class="alert alert-success" role="alert">
-                                graduado
-                              </div>
+                            <div class="alert alert-success" role="alert">
+                              graduado
+                            </div>
                             {% endif %}
 
 
                           </td>
-                          
-                          <td>{{data.Carrera}}</td>
+                          <td>
+                            <form action="/individual" method="POST">
+                              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                              <input type="hidden" class="form-control" placeholder="Full name" name="ver">
+                              <input type="submit" value=ver class="btn btn-success">
+
+                            </form>
+                          </td>
+
                         </tr>
                         {%endfor%}
 
@@ -185,6 +226,7 @@
             </div>
 
             <div class="content-wrapper">
+
               <div class="card card-danger">
                 <div class="card-header">
 
@@ -201,7 +243,7 @@
                 </div>
                 <div class="card-body">
                   <canvas id="donutChart"
-                    style="min-height: 250px; height: 250px; max-height: 200px; max-width: 100%;"></canvas>
+                    style="min-height: 250px; height: 100px; max-height: 10px; max-width: 100%;"></canvas>
                 </div>
               </div>
 
@@ -212,7 +254,7 @@
                       <table class="table table-head-fixed text-nowrap">
                         <thead>
                           <tr>
-                            <th style="width: 30px">#</th>
+                            <th style="width: 20px">#</th>
                             <th>Carrera</th>
 
                             <th style="width: 10x">Cantidad de estudiantes</th>
@@ -256,16 +298,17 @@
               </div>
 
             </div>
+
+
+
           </div>
 
         </div>
 
+      </section>
+
+
     </div>
-
-    </section>
-
-
-  </div>
   </div>
 
 
@@ -278,7 +321,7 @@
     </div>
   </footer>
   </div>
-
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
   <script src="static\plugins\jquery\jquery.min.js"></script>
 
   <script src="static\plugins\bootstrap\js\bootstrap.bundle.min.js"></script>
@@ -291,6 +334,7 @@
   <script src="static\dist\js\demo.js"></script>
 
   <script src="static\dist\js\pages\dashboard3.js"></script>
+  <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
 
 
 
@@ -357,6 +401,9 @@
 
 
     })
+    $(document).ready( function () {
+      $('#myTable').DataTable();
+  } );
   </script>
 
 </body>
