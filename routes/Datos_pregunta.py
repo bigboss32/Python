@@ -12,4 +12,7 @@ db = MySQL()
 @Datos_pregunta_bleu.route('/Datos_pregunta',methods=['GET', 'POST'])
 @login_required
 def datos_pregunta():
-    return render_template("data.html")
+    print()
+    Data=pandas.read_sql("select * from registro WHERE idRegistro='{}'""".format(request.form['ver']),db.connection)
+    print(Data)
+    return render_template("data.html",data=Data.loc[0,'nombre'])

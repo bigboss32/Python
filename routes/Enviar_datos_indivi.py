@@ -56,9 +56,9 @@ def informe_indiv():
     print(datosgenreal.loc[1,'nombre'])
     
     for i in range(len(datosgenreal)):
-       numero=numero+1
       
-       Persona.append(persona(numero,datosgenreal.loc[i,'nombre'],datosgenreal.loc[i,'FKresultado'],datosgenreal.loc[i,'cedula'],datosgenreal.loc[i,'Carrera']))
+      
+       Persona.append(persona(datosgenreal.loc[i,'idRegistro'],datosgenreal.loc[i,'nombre'],datosgenreal.loc[i,'FKresultado'],datosgenreal.loc[i,'cedula'],datosgenreal.loc[i,'Carrera']))
             
                 
 

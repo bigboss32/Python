@@ -58,7 +58,7 @@ def datos():
                for i in range(len(Datafremenombre)):
                     numero=numero+1
                     
-                    Persona.append(persona(numero,datosgenreal.loc[i,'nombre'],datosgenreal.loc[i,'FKresultado'],datosgenreal.loc[i,'cedula'],datosgenreal.loc[i,'Carrera']))
+                    Persona.append(persona(datosgenreal.loc[i,'idRegistro'],datosgenreal.loc[i,'nombre'],datosgenreal.loc[i,'FKresultado'],datosgenreal.loc[i,'cedula'],datosgenreal.loc[i,'Carrera']))
                          
                               
               
