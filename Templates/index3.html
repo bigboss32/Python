@@ -170,6 +170,7 @@
                         <tr>
                           <th>#</th>
                           <th>Nombre</th>
+                          <th>cedula</th>
                           <th>Resultado</th>
                           <th>Accion</th>
 
@@ -181,20 +182,20 @@
                         <tr>
                           <td>{{data.id}}</td>
                           <td>{{data.nombre}}</td>
+                          <td>{{data.cedula}}</td>
 
 
                           <td>
 
-                            {% if data.prediccion ==0%}
-                            <div class="alert alert-secondary" role="alert">
-                              Abandono
-                            </div>
-                            {%else%}
-                            <div class="alert alert-success" role="alert">
-                              graduado
-                            </div>
-                            {% endif %}
-
+                              {% if data.prediccion==0%}
+                                <div class="alert alert-secondary" role="alert">
+                                  Abandono
+                                </div>
+                              {%else%}
+                                <div class="alert alert-success" role="alert">
+                                  graduado
+                                </div>
+                              {% endif %}
 
                           </td>
                           <td>

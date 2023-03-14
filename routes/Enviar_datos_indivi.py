@@ -141,6 +141,8 @@ def Eliminar():
     cursor = db.connection.cursor()
     sql=" DELETE FROM registro WHERE Numero_entrega ="+nombre[0]
     cursor.execute(sql)
+    sql=" DELETE FROM registro_encuesta WHERE Numero_entrega ="+nombre[0]
+    cursor.execute(sql)
     cursor.connection.commit()
     remove(file)
     return redirect("/Historia_cvs")

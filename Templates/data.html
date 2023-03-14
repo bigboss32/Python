@@ -37,7 +37,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{data}}</h1>
+            <div class="alert alert-secondary" role="alert">
+              <h1>{{data}}</h1>
+            </div>
+            
+            <div class="alert alert-primary" role="alert">
+              Cedula {{cedula}}
+            </div>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -56,36 +62,36 @@
           <div class="col-12">
             <div class="card-body">
               <div class="card">
-                <div class="card-body table-responsive p-0" style="height: 300px; ">
+                <div class="card-body table-responsive p-0" style="height: 700px; ">
                   <div class="card-body p-0">
                     <table class="table table-head-fixed text-nowrap">
                       <thead>
                         <tr>
-                          <th style="width: 20px">#</th>
+                          <th style="width: 30px">#</th>
                           <th>Pregunta</th>
 
-                          <th style="width: 10x">Respuesta</th>
+                          <th >Respuesta</th>
                         </tr>
-                        {% for datoscarrea in datoscarrea %}
+                        {% for a in a %}
 
                         <td>
                           <div class="alert alert-info" role="alert">
-                            {{datoscarrea.id}}
+                            {{a.id}}
                           </div>
 
                         </td>
 
                         <td>
-                          <div class="alert alert-info" role="alert">
-
-                            {{datoscarrea.nombre}}
+                          <div class="alert alert-info" role="alert" style="width: 400px">
+                            {{a.pregunta}}
+                          
 
                           </div>
                         </td>
 
                         <td>
-                          <div class="alert alert-danger" role="alert">
-                            {{datoscarrea.cantidad}}
+                          <div class="alert alert-danger" role="alert"  style="width: 600px">
+                              {{a.respuesta}}
                           </div>
                         </td>
                         </tr>
@@ -94,6 +100,7 @@
 
                           </tbody>
                     </table>
+                    
 
                   </div>
 

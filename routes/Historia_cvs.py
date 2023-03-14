@@ -3,12 +3,14 @@ import os
 import time
 from models.entities.Archivo import Tree
 from flask_login import login_required
+from routes.Subir import comprobar
 historial_blue=Blueprint('Historia_cvs',__name__)
 
 
 @historial_blue.route('/Historia_cvs')
 @login_required
 def historial():
+        comprobar()
         a=0
         ejemplo_dir = 'Archivo'
         contenido = os.listdir(ejemplo_dir)
