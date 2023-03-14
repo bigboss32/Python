@@ -33,11 +33,11 @@ def comprobar():
     
 @login_required
 def Subir():
-        global prediction
-        global error
-        prediction="Error en el formato de los datos"
-        error="No envio ningun archivo valido"
-        try:
+            global prediction
+            global error
+            prediction="Error en el formato de los datos"
+            error="No envio ningun archivo valido"
+      
             comprobar()
             cursor = db.connection.cursor()
             file = request.files["subirarchivo"]
@@ -66,7 +66,7 @@ def Subir():
                         file.save(os.path.join("Archivo",str(max_entrega+1)+")"+ filename))
                         filename2 = "Archivo/"+nombre
 
-                        dfFiltro = pandas.read_csv(filename2, sep=';', encoding="utf-8")
+                        dfFiltro = pandas.read_csv(filename2, sep=';', encoding='latin-1')
                         data_final=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
                                                     ,'¿Cómo_financia_sus_estudios?','CIRCUNSCRIPCION','¿Dispone_de_un_computador_permanentemente?','¿Posee_conexión_permanente_a_internet?'
                                                     ,'SEXO','ESTRATO']]
@@ -228,7 +228,4 @@ def Subir():
                             ))
                         cursor.connection.commit()
                         return redirect("/Historia_cvs")
-        except ValueError:
-            prediction="Error en el formato de los datos"
-        return render_template("500.html", prediction=prediction,error=error)
        

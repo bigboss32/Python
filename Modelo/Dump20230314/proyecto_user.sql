@@ -16,40 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `registro`
+-- Dumping data for table `user`
 --
 
-DROP TABLE IF EXISTS `registro`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `registro` (
-  `idRegistro` int NOT NULL AUTO_INCREMENT,
-  `numero_entrega` int NOT NULL,
-  `Carrera` varchar(45) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `cedula` varchar(45) NOT NULL,
-  `edad_de_ingreso` int NOT NULL,
-  `Actualmente_trabaja` int NOT NULL,
-  `Tipo_de_población_a_la_que_pertenece` int NOT NULL,
-  `ESTADO_CIVIL` int NOT NULL,
-  `Cómo_financia_sus_estudios` int NOT NULL,
-  `CIRCUNSCRIPCION` int NOT NULL,
-  `Dispone_de_un_computador_permanentemente` int NOT NULL,
-  `Posee_conexión_permanente_a_internet` int NOT NULL,
-  `sexo` int NOT NULL,
-  `estrato` int NOT NULL,
-  `FKresultado` int NOT NULL,
-  PRIMARY KEY (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=3873 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `registro`
---
-
-LOCK TABLES `registro` WRITE;
-/*!40000 ALTER TABLE `registro` DISABLE KEYS */;
-/*!40000 ALTER TABLE `registro` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (24,'miguel@udla','pbkdf2:sha256:260000$sL19i1mmPI6F6F0K$f0f5ff36b83188417f7d81b43f6fbe0fb9b053174250b976482b8a535f5cc2d0','miguel garzon');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -61,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-05 22:44:19
+-- Dump completed on 2023-03-14 11:12:18
