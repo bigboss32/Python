@@ -58,23 +58,19 @@ def Subir():
                 max_entrega=numero_entrega.loc[0,'MAX(numero_entrega)']
                 if max_entrega==None:
                     max_entrega=0
-                
-                    
-                    
-                    if max_entrega>=0:
-                        nombre=str(max_entrega+1)+")"+ filename
-                        file.save(os.path.join("Archivo",str(max_entrega+1)+")"+ filename))
-                        filename2 = "Archivo/"+nombre
+                nombre=str(max_entrega+1)+")"+ filename
+                file.save(os.path.join("Archivo",str(max_entrega+1)+")"+ filename))
+                filename2 = "Archivo/"+nombre
 
-                        dfFiltro = pandas.read_csv(filename2, sep=';', encoding='latin-1')
-                        data_final=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
+                dfFiltro = pandas.read_csv(filename2, sep=';', encoding='latin-1')
+                data_final=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
                                                     ,'¿Cómo_financia_sus_estudios?','CIRCUNSCRIPCION','¿Dispone_de_un_computador_permanentemente?','¿Posee_conexión_permanente_a_internet?'
                                                     ,'SEXO','ESTRATO']]
-                        data_final.insert(loc = 0 , column = 'numero_entrega', value = max_entrega+1)
+                data_final.insert(loc = 0 , column = 'numero_entrega', value = max_entrega+1)
 
-                        print(data_final['EDAD_DE_INGRESO'])
+                print(data_final['EDAD_DE_INGRESO'])
                     
-                        for i in range(len(data_final)):
+                for i in range(len(data_final)):
                             a=data_final.iloc[i]
                         
                             cursor.execute('INSERT INTO registro_encuesta (numero_entrega,Carrera, nombre, cedula,edad_de_ingreso,Actualmente_trabaja,Tipo_de_población_a_la_que_pertenece,ESTADO_CIVIL,Cómo_financia_sus_estudios,CIRCUNSCRIPCION,Dispone_de_un_computador_permanentemente,Posee_conexión_permanente_a_internet,sexo,estrato) VALUES (%s,%s,%s, %s,%s, %s,%s, %s, %s,%s, %s, %s,%s,%s)',
@@ -86,135 +82,50 @@ def Subir():
 
 
 
-                        dfFiltro['EDAD_DE_INGRESO']=dfFiltro['EDAD_DE_INGRESO'].astype(int) 
-                        dfFiltro['EDAD_DE_INGRESO']=pandas.cut(dfFiltro['EDAD_DE_INGRESO'],[0,180,240,340,440,540],labels=[0,1,2,3,4])
-                        dfFiltro['EDAD_DE_INGRESO']=dfFiltro['EDAD_DE_INGRESO'].astype(int) 
+                dfFiltro['EDAD_DE_INGRESO']=dfFiltro['EDAD_DE_INGRESO'].astype(int) 
+                dfFiltro['EDAD_DE_INGRESO']=pandas.cut(dfFiltro['EDAD_DE_INGRESO'],[0,18,24,34,44,54],labels=[0,1,2,3,4])
+                dfFiltro['EDAD_DE_INGRESO']=dfFiltro['EDAD_DE_INGRESO'].astype(int) 
                         #Columna de Sexo 
-                        dfFiltro.SEXO.replace(['M', 'F'],[1,0], inplace=True)
+                dfFiltro.SEXO.replace(['M', 'F'],[1,0], inplace=True)
 
-                        dfFiltro.Actualmente_trabaja.replace(['Sí', 'No'],[1,0], inplace=True)
-                        dfFiltro.Tipo_de_población_a_la_que_pertenece.replace(["Urbana","Rural"],[1,0], inplace=True)
+                dfFiltro.Actualmente_trabaja.replace(['Sí', 'No'],[1,0], inplace=True)
+                dfFiltro.Tipo_de_población_a_la_que_pertenece.replace(["Urbana","Rural"],[1,0], inplace=True)
 
-                        dfFiltro["ESTADO_CIVIL"].replace(['Soltero', 'Unión Libre', 'Madre soltera', 'Casado', 'Religioso','Divorciado'],[0,1,2,3,4,5], inplace=True)
+                dfFiltro["ESTADO_CIVIL"].replace(['Soltero', 'Unión Libre', 'Madre soltera', 'Casado', 'Religioso','Divorciado'],[0,1,2,3,4,5], inplace=True)
 
-                        dfFiltro['¿Cómo_financia_sus_estudios?'].replace(['Familia', 'Crédito', 'Recursos Propios', 'Beca'],[0,1,2,3], inplace=True)
+                dfFiltro['¿Cómo_financia_sus_estudios?'].replace(['Familia', 'Crédito', 'Recursos Propios', 'Beca'],[0,1,2,3], inplace=True)
 
-                        dfFiltro['CIRCUNSCRIPCION'].replace(['REGULAR PREGRADO', 'DESPLAZADO', 'PUEBLO INDIGENA',
+                dfFiltro['CIRCUNSCRIPCION'].replace(['REGULAR PREGRADO', 'DESPLAZADO', 'PUEBLO INDIGENA',
                                                             'COMUNIDAD NEGRA', 'VICTIMA DEL CONFLICTO ARMADO INTERNO'],
                                                             [0,1,2,3,4], inplace=True)
 
                         # Columna de Estrato 
 
-                        dfFiltro['¿Dispone_de_un_computador_permanentemente?'].replace(['Sí', 'No'],[1,0], inplace=True)
+                dfFiltro['¿Dispone_de_un_computador_permanentemente?'].replace(['Sí', 'No'],[1,0], inplace=True)
 
-                        dfFiltro['¿Posee_conexión_permanente_a_internet?'].replace(['Sí', 'No'],[1,0], inplace=True)
+                dfFiltro['¿Posee_conexión_permanente_a_internet?'].replace(['Sí', 'No'],[1,0], inplace=True)
 
-                        dfFiltro.loc[dfFiltro.SITE_DESCRIPCION!="GRADUADO","SITE_DESCRIPCION"]=0
-                        dfFiltro.loc[dfFiltro.SITE_DESCRIPCION=="GRADUADO","SITE_DESCRIPCION"]=1
-                        dfFiltro["SITE_DESCRIPCION"]=dfFiltro["SITE_DESCRIPCION"].astype(int)
+                dfFiltro.loc[dfFiltro.SITE_DESCRIPCION!="GRADUADO","SITE_DESCRIPCION"]=0
+                dfFiltro.loc[dfFiltro.SITE_DESCRIPCION=="GRADUADO","SITE_DESCRIPCION"]=1
+                dfFiltro["SITE_DESCRIPCION"]=dfFiltro["SITE_DESCRIPCION"].astype(int)
 
 
-                        data_final = pandas.DataFrame()
+                data_final = pandas.DataFrame()
 
-                        data_final=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
+                data_final=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
                                                     ,'¿Cómo_financia_sus_estudios?','CIRCUNSCRIPCION','¿Dispone_de_un_computador_permanentemente?','¿Posee_conexión_permanente_a_internet?'
                                                     ,'SEXO','ESTRATO']]
 
 
-                        data =  data_final 
+                data =  data_final 
             
-                        data.insert(loc = 0 , column = 'numero_entrega', value = max_entrega+1)
+                data.insert(loc = 0 , column = 'numero_entrega', value = max_entrega+1)
                     
-                        loaded_model=joblib.load('Modelo\MLPClassifier.pkl')
-                    
-                        b=data.iloc[:, 4:14] 
-                        print(b.columns)
-                        for i in range(len(data)):
-                            a=data.iloc[i]
-                            print(".........")
-                            print(a)
-                            to_predict = np.array(b.iloc[i]).reshape(1, 10)
-                            result = loaded_model.predict(to_predict)
-                            final=result[0]
-                            
-                            cursor.execute('INSERT INTO registro (numero_entrega,Carrera, nombre, cedula,edad_de_ingreso,Actualmente_trabaja,Tipo_de_población_a_la_que_pertenece,ESTADO_CIVIL,Cómo_financia_sus_estudios,CIRCUNSCRIPCION,Dispone_de_un_computador_permanentemente,Posee_conexión_permanente_a_internet,sexo,estrato,FKresultado) VALUES (%s,%s,%s, %s,%s, %s,%s, %s, %s,%s, %s, %s,%s,%s,%s)',
-                            (
-                            a.numero_entrega,a.PROGRAMA,a.nombre,a.cedula,a.EDAD_DE_INGRESO,a.Actualmente_trabaja,a.Tipo_de_población_a_la_que_pertenece,a.ESTADO_CIVIL,a['¿Cómo_financia_sus_estudios?'],a.CIRCUNSCRIPCION,a['¿Dispone_de_un_computador_permanentemente?'],a['¿Posee_conexión_permanente_a_internet?'],a.SEXO,a.ESTRATO,final
-                            ))
-                        cursor.connection.commit()
-                        return redirect("/Historia_cvs")
-                else:
-
+                loaded_model=joblib.load('Modelo\MLPClassifier.pkl')
                 
-                    
-                        nombre=str(max_entrega+1)+")"+ filename
-                        file.save(os.path.join("Archivo",str(max_entrega+1)+")"+ filename))
-                        filename2 = "Archivo/"+nombre
-
-                        dfFiltro = pandas.read_csv(filename2, sep=';', encoding="utf-8")
-                        data_final=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
-                                                    ,'¿Cómo_financia_sus_estudios?','CIRCUNSCRIPCION','¿Dispone_de_un_computador_permanentemente?','¿Posee_conexión_permanente_a_internet?'
-                                                    ,'SEXO','ESTRATO']]
-                        data_final.insert(loc = 0 , column = 'numero_entrega', value = max_entrega+1)
-
-                        print(data_final['EDAD_DE_INGRESO'])
-                    
-                        for i in range(len(data_final)):
-                            a=data_final.iloc[i]
-                        
-                            cursor.execute('INSERT INTO registro_encuesta (numero_entrega,Carrera, nombre, cedula,edad_de_ingreso,Actualmente_trabaja,Tipo_de_población_a_la_que_pertenece,ESTADO_CIVIL,Cómo_financia_sus_estudios,CIRCUNSCRIPCION,Dispone_de_un_computador_permanentemente,Posee_conexión_permanente_a_internet,sexo,estrato) VALUES (%s,%s,%s, %s,%s, %s,%s, %s, %s,%s, %s, %s,%s,%s)',
-                                (
-                                a.numero_entrega,a.PROGRAMA,a.nombre,a.cedula,a.EDAD_DE_INGRESO,"si",a.Tipo_de_población_a_la_que_pertenece,a.ESTADO_CIVIL,a['¿Cómo_financia_sus_estudios?'],a.CIRCUNSCRIPCION,a['¿Dispone_de_un_computador_permanentemente?'],a['¿Posee_conexión_permanente_a_internet?'],a.SEXO,a.ESTRATO
-                                ))
-
-
-
-
-
-                        dfFiltro['EDAD_DE_INGRESO']=dfFiltro['EDAD_DE_INGRESO'].astype(int) 
-                        dfFiltro['EDAD_DE_INGRESO']=pandas.cut(dfFiltro['EDAD_DE_INGRESO'],[0,180,240,340,440,540],labels=[0,1,2,3,4])
-                        dfFiltro['EDAD_DE_INGRESO']=dfFiltro['EDAD_DE_INGRESO'].astype(int) 
-                        #Columna de Sexo 
-                        dfFiltro.SEXO.replace(['M', 'F'],[1,0], inplace=True)
-
-                        dfFiltro.Actualmente_trabaja.replace(['Sí', 'No'],[1,0], inplace=True)
-                        dfFiltro.Tipo_de_población_a_la_que_pertenece.replace(["Urbana","Rural"],[1,0], inplace=True)
-
-                        dfFiltro["ESTADO_CIVIL"].replace(['Soltero', 'Unión Libre', 'Madre soltera', 'Casado', 'Religioso','Divorciado'],[0,1,2,3,4,5], inplace=True)
-
-                        dfFiltro['¿Cómo_financia_sus_estudios?'].replace(['Familia', 'Crédito', 'Recursos Propios', 'Beca'],[0,1,2,3], inplace=True)
-
-                        dfFiltro['CIRCUNSCRIPCION'].replace(['REGULAR PREGRADO', 'DESPLAZADO', 'PUEBLO INDIGENA',
-                                                            'COMUNIDAD NEGRA', 'VICTIMA DEL CONFLICTO ARMADO INTERNO'],
-                                                            [0,1,2,3,4], inplace=True)
-
-                        # Columna de Estrato 
-
-                        dfFiltro['¿Dispone_de_un_computador_permanentemente?'].replace(['Sí', 'No'],[1,0], inplace=True)
-
-                        dfFiltro['¿Posee_conexión_permanente_a_internet?'].replace(['Sí', 'No'],[1,0], inplace=True)
-
-                        dfFiltro.loc[dfFiltro.SITE_DESCRIPCION!="GRADUADO","SITE_DESCRIPCION"]=0
-                        dfFiltro.loc[dfFiltro.SITE_DESCRIPCION=="GRADUADO","SITE_DESCRIPCION"]=1
-                        dfFiltro["SITE_DESCRIPCION"]=dfFiltro["SITE_DESCRIPCION"].astype(int)
-
-
-                        data_final = pandas.DataFrame()
-
-                        data_final=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
-                                                    ,'¿Cómo_financia_sus_estudios?','CIRCUNSCRIPCION','¿Dispone_de_un_computador_permanentemente?','¿Posee_conexión_permanente_a_internet?'
-                                                    ,'SEXO','ESTRATO']]
-
-
-                        data =  data_final 
-            
-                        data.insert(loc = 0 , column = 'numero_entrega', value = max_entrega+1)
-                    
-                        loaded_model=joblib.load('Modelo\MLPClassifier.pkl')
-                    
-                        b=data.iloc[:, 4:14] 
-                        print(b.columns)
-                        for i in range(len(data)):
+                b=data.iloc[:, 4:14] 
+                print(b.columns)
+                for i in range(len(data)):
                             a=data.iloc[i]
                             print(".........")
                             print(a)
@@ -226,6 +137,6 @@ def Subir():
                             (
                             a.numero_entrega,a.PROGRAMA,a.nombre,a.cedula,a.EDAD_DE_INGRESO,a.Actualmente_trabaja,a.Tipo_de_población_a_la_que_pertenece,a.ESTADO_CIVIL,a['¿Cómo_financia_sus_estudios?'],a.CIRCUNSCRIPCION,a['¿Dispone_de_un_computador_permanentemente?'],a['¿Posee_conexión_permanente_a_internet?'],a.SEXO,a.ESTRATO,final
                             ))
-                        cursor.connection.commit()
-                        return redirect("/Historia_cvs")
-       
+                cursor.connection.commit()
+                return redirect("/Historia_cvs")
+               

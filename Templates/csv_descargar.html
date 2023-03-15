@@ -59,46 +59,37 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Archivo</th>
-                        <th>fecha</th>
-                        <th>extension</th>
-                        <th>version</th>
-                        <th>Acciones</th>
+                     
+                        <th>Carrera</th>
+                        <th>edad_de_ingreso</th>
+                        <th>trabaja</th>
+                        <th>Tipo_de_población</th>
+                        <th>ESTADO_CIVIL</th>
+                        <th>financia</th>
+                        <th>CIRCUNSCRIPCION</th>
+                        <th>computador</th>
+                        <th>Posee_conexión</th>
+                        <th>sexo</th>
+                        <th>estrato</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
 
-                        {% for archivos in archivos %}
+                        {% for filas in filas %}
 
-                        <td>{{archivos.nombre}}</td>
-                        <td>{{archivos.fecha}}</td>
-                        <td> <form action="/csv_descargar" method="POST">
-                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                          <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name"
-                            name="csv">
-                          <input type="submit" value=CSV class="btn btn-warning">
-
-                        </form></td>
-                        <td> 1.0</td>
-                        <td>
-                          <form action="/individual" method="POST">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
-                            <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name"
-                              name="analizar">
-                            <input type="submit" value=Analizar class="btn btn-success">
-
-                          </form>
-                          <form action="/Eliminar" method="POST">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                            <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name"
-                              name="eliminar">
-                            <input type="submit" value=Eliminar class="btn btn-danger">
-
-                          </form>
-                         
-                        </td>
+                        <td>{{filas.Carrera}}</td>
+                        <td>{{filas.edad_de_ingreso}}</td>
+                        <td> {{filas.Actualmente_trabaja}}</td>
+                        <td>{{filas.Tipo_de_población_a_la_que_pertenece}} </td>
+                        <td>{{filas.ESTADO_CIVIL}}</td>
+                        <td>{{filas.Cómo_financia_sus_estudios}}</td>
+                        <td> {{filas.CIRCUNSCRIPCION}}</td>
+                        <td> {{filas.Dispone_de_un_computador_permanentemente}}</td>
+                        <td>{{filas.Posee_conexión_permanente_a_internet}}</td>
+                        <td>{{filas.sexo}} </td>
+                        <td>{{filas.estrato
+                        }}</td>
                       </tr>
                       {%endfor%}
 
@@ -163,7 +154,23 @@
   <!-- AdminLTE for demo purposes -->
   <script src="static\dist\js\demo.js"></script>
   <!-- Page specific script -->
-
+  <script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
 </body>
 
 </html>
