@@ -14,20 +14,11 @@ db = MySQL()
     
 @login_required
 def csv_descargar():
-    print(request.form['csv'])
+    cvs=request.form['csv']
+    print(cvs[0])
 
-    datos=pandas.read_sql("select * from registro_encuesta",db.connection)
-    print(datos.loc[0,'Carrera'])
-    print(datos.loc[0,'edad_de_ingreso'])
-    print(datos.loc[0,'Actualmente_trabaja'])
-    print(datos.loc[0,'Tipo_de_población_a_la_que_pertenece'])
-    print(datos.loc[0,'ESTADO_CIVIL'])
-    print(datos.loc[0,'Cómo_financia_sus_estudios'])
-    print(datos.loc[0,'CIRCUNSCRIPCION'])
-    print(datos.loc[0,'Dispone_de_un_computador_permanentemente'])
-    print(datos.loc[0,'Posee_conexión_permanente_a_internet'])
-    print(datos.loc[0,'sexo'])
-    print(datos.loc[0,'estrato'])
+    datos=pandas.read_sql("SELECT * FROM registro_encuesta",db.connection)
+   
     filas=[]
     for i in range(len(datos)):
       
@@ -35,6 +26,8 @@ def csv_descargar():
             filas.append(csv(
 
                         datos.loc[i,'Carrera'],
+                        datos.loc[i,'nombre'],
+                        datos.loc[i,'cedula'],
                         datos.loc[i,'edad_de_ingreso'],
                         datos.loc[i,'Actualmente_trabaja'],
                         datos.loc[i,'Tipo_de_población_a_la_que_pertenece'],
@@ -44,7 +37,8 @@ def csv_descargar():
                         datos.loc[i,'Dispone_de_un_computador_permanentemente'],
                         datos.loc[i,'Posee_conexión_permanente_a_internet'],
                         datos.loc[i,'sexo'],
-                        datos.loc[i,'estrato']
+                        datos.loc[i,'estrato'],
+                        datos.loc[i,'FKresultado']
 
 
 

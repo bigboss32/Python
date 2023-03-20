@@ -28,7 +28,7 @@ CREATE TABLE `user` (
   `password` varchar(150) NOT NULL,
   `fullname` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (24,'miguel@udla','pbkdf2:sha256:260000$sL19i1mmPI6F6F0K$f0f5ff36b83188417f7d81b43f6fbe0fb9b053174250b976482b8a535f5cc2d0','miguel garzon');
+INSERT INTO `user` VALUES (24,'miguel@udla','pbkdf2:sha256:260000$sL19i1mmPI6F6F0K$f0f5ff36b83188417f7d81b43f6fbe0fb9b053174250b976482b8a535f5cc2d0','miguel garzon'),(25,'laura@udla','pbkdf2:sha256:260000$DEVjj3lDvWKozz5v$320ca6930f0d95fbc672752eb8d36c5bfb8d9971485157948f92e317d27c38ef','laura');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-14 12:04:26
+-- Dump completed on 2023-03-20  8:31:42

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, render_template
+from flask import Blueprint, request, redirect, render_template,url_for
 import os
 from werkzeug.utils import secure_filename
 from flask_login import login_required
@@ -20,10 +20,12 @@ def allowed_file(file):
     return False
 
 
-def comprobar():
+def comprobar(user):
 
     if os.path.isdir("Archivo") == False:
          os.mkdir("Archivo")
+    if os.path.isdir("Archivo"+"/"+user) == False:
+        os.mkdir("Archivo"+"/"+user)
 
 
 @Subir_blue.route('/Subir', methods=['POST'])
@@ -34,10 +36,14 @@ def Subir():
             prediction = "Error en el formato de los datos"
             error = "No envio ningun archivo valido"
             try:
-                    comprobar()
+                   
                     cursor = db.connection.cursor()
                     file = request.files["subirarchivo"]
-                        
+                    user=request.form["usuario"]
+                   
+                    comprobar(user)
+                  
+                    
 
                         
                         
@@ -55,8 +61,9 @@ def Subir():
                         if max_entrega==None:
                             max_entrega=0
                         nombre=str(max_entrega+1)+")"+ filename
-                        file.save(os.path.join("Archivo",str(max_entrega+1)+")"+ filename))
-                        filename2 = "Archivo/"+nombre
+                        file.save(os.path.join("Archivo"+"/"+user,str(max_entrega+1)+")"+ filename))
+                        filename2 = "Archivo/"+user+"/"+nombre
+                      
 
                         dfFiltro = pandas.read_csv(filename2, sep=';')
                         data_final=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
@@ -64,15 +71,9 @@ def Subir():
                                                             ,'SEXO','ESTRATO']]
                         data_final.insert(loc = 0 , column = 'numero_entrega', value = max_entrega+1)
 
-                        print(data_final)
+                    
                             
-                        for i in range(len(data_final)):
-                                    a=data_final.iloc[i]
-                                
-                                    cursor.execute('INSERT INTO registro_encuesta (numero_entrega,Carrera, nombre, cedula,edad_de_ingreso,Actualmente_trabaja,Tipo_de_población_a_la_que_pertenece,ESTADO_CIVIL,Cómo_financia_sus_estudios,CIRCUNSCRIPCION,Dispone_de_un_computador_permanentemente,Posee_conexión_permanente_a_internet,sexo,estrato) VALUES (%s,%s,%s, %s,%s, %s,%s, %s, %s,%s, %s, %s,%s,%s)',
-                                        (
-                                        a.numero_entrega,a.PROGRAMA,a.nombre,a.cedula,a.EDAD_DE_INGRESO,"si",a.Tipo_de_población_a_la_que_pertenece,a.ESTADO_CIVIL,a['¿Cómo_financia_sus_estudios?'],a.CIRCUNSCRIPCION,a['¿Dispone_de_un_computador_permanentemente?'],a['¿Posee_conexión_permanente_a_internet?'],a.SEXO,a.ESTRATO
-                                        ))
+                        
 
 
 
@@ -104,35 +105,39 @@ def Subir():
                     
 
 
-                        data_final = pandas.DataFrame()
-
-                        data_final=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
+                      
+                        data=dfFiltro.loc[:, ['nombre','cedula','PROGRAMA','EDAD_DE_INGRESO','Actualmente_trabaja','Tipo_de_población_a_la_que_pertenece','ESTADO_CIVIL'
                                                             ,'¿Cómo_financia_sus_estudios?','CIRCUNSCRIPCION','¿Dispone_de_un_computador_permanentemente?','¿Posee_conexión_permanente_a_internet?'
                                                             ,'SEXO','ESTRATO']]
 
 
-                        data =  data_final 
+                      
                     
                         data.insert(loc = 0 , column = 'numero_entrega', value = max_entrega+1)
                             
                         loaded_model=joblib.load('Modelo\MLPClassifier.pkl')
                         
                         b=data.iloc[:, 4:14] 
-                        print(b.columns)
+                
                         for i in range(len(data)):
                                     a=data.iloc[i]
-                                    print(".........")
-                                    print(a)
                                     to_predict = np.array(b.iloc[i]).reshape(1, 10)
                                     result = loaded_model.predict(to_predict)
                                     final=result[0]
                                     
-                                    cursor.execute('INSERT INTO registro (numero_entrega,Carrera, nombre, cedula,edad_de_ingreso,Actualmente_trabaja,Tipo_de_población_a_la_que_pertenece,ESTADO_CIVIL,Cómo_financia_sus_estudios,CIRCUNSCRIPCION,Dispone_de_un_computador_permanentemente,Posee_conexión_permanente_a_internet,sexo,estrato,FKresultado) VALUES (%s,%s,%s, %s,%s, %s,%s, %s, %s,%s, %s, %s,%s,%s,%s)',
+                                    cursor.execute('INSERT INTO registro (numero_entrega,Carrera, nombre, cedula,edad_de_ingreso,Actualmente_trabaja,Tipo_de_población_a_la_que_pertenece,ESTADO_CIVIL,Cómo_financia_sus_estudios,CIRCUNSCRIPCION,Dispone_de_un_computador_permanentemente,Posee_conexión_permanente_a_internet,sexo,estrato,FKresultado,usuario) VALUES (%s,%s,%s, %s,%s, %s,%s, %s, %s,%s, %s, %s,%s,%s,%s,%s)',
                                     (
-                                    a.numero_entrega,a.PROGRAMA,a.nombre,a.cedula,a.EDAD_DE_INGRESO,a.Actualmente_trabaja,a.Tipo_de_población_a_la_que_pertenece,a.ESTADO_CIVIL,a['¿Cómo_financia_sus_estudios?'],a.CIRCUNSCRIPCION,a['¿Dispone_de_un_computador_permanentemente?'],a['¿Posee_conexión_permanente_a_internet?'],a.SEXO,a.ESTRATO,final
+                                    a.numero_entrega,a.PROGRAMA,a.nombre,a.cedula,a.EDAD_DE_INGRESO,a.Actualmente_trabaja,a.Tipo_de_población_a_la_que_pertenece,a.ESTADO_CIVIL,a['¿Cómo_financia_sus_estudios?'],a.CIRCUNSCRIPCION,a['¿Dispone_de_un_computador_permanentemente?'],a['¿Posee_conexión_permanente_a_internet?'],a.SEXO,a.ESTRATO,final,user
                                     ))
+
+                                    a=data_final.iloc[i]
+                                
+                                    cursor.execute('INSERT INTO registro_encuesta (numero_entrega,Carrera, nombre, cedula,edad_de_ingreso,Actualmente_trabaja,Tipo_de_población_a_la_que_pertenece,ESTADO_CIVIL,Cómo_financia_sus_estudios,CIRCUNSCRIPCION,Dispone_de_un_computador_permanentemente,Posee_conexión_permanente_a_internet,sexo,estrato,FKresultado,usuario) VALUES (%s,%s,%s, %s,%s, %s,%s, %s, %s,%s, %s, %s,%s,%s,%s,%s)',
+                                        (
+                                        a.numero_entrega,a.PROGRAMA,a.nombre,a.cedula,a.EDAD_DE_INGRESO,a.Actualmente_trabaja,a.Tipo_de_población_a_la_que_pertenece,a.ESTADO_CIVIL,a['¿Cómo_financia_sus_estudios?'],a.CIRCUNSCRIPCION,a['¿Dispone_de_un_computador_permanentemente?'],a['¿Posee_conexión_permanente_a_internet?'],a.SEXO,a.ESTRATO,final,user
+                                        ))
                         cursor.connection.commit()
-                        return redirect("/Historia_cvs")
+                        return  redirect(url_for('Datos.datos',question_id=user))
             
             except ValueError:
                 prediction="Error en el formato de los datos"

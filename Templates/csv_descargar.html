@@ -61,6 +61,8 @@
                       <tr>
                      
                         <th>Carrera</th>
+                        <th>nombre</th>
+                        <th>cedula</th>
                         <th>edad_de_ingreso</th>
                         <th>trabaja</th>
                         <th>Tipo_de_población</th>
@@ -71,6 +73,7 @@
                         <th>Posee_conexión</th>
                         <th>sexo</th>
                         <th>estrato</th>
+                        <th>resultado</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -79,6 +82,8 @@
                         {% for filas in filas %}
 
                         <td>{{filas.Carrera}}</td>
+                        <td>{{filas.nombre}}</td>
+                        <td>{{filas.cedula}}</td>
                         <td>{{filas.edad_de_ingreso}}</td>
                         <td> {{filas.Actualmente_trabaja}}</td>
                         <td>{{filas.Tipo_de_población_a_la_que_pertenece}} </td>
@@ -88,8 +93,8 @@
                         <td> {{filas.Dispone_de_un_computador_permanentemente}}</td>
                         <td>{{filas.Posee_conexión_permanente_a_internet}}</td>
                         <td>{{filas.sexo}} </td>
-                        <td>{{filas.estrato
-                        }}</td>
+                        <td>{{filas.estrato}}</td>
+                        <td>{{filas.FKresultado}}</td>
                       </tr>
                       {%endfor%}
 

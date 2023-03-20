@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template
+from flask import Blueprint,render_template,request
 from flask_login import login_required
 from flask_mysqldb import MySQL
 import pandas
@@ -9,23 +9,23 @@ datos_blue=Blueprint('Datos',__name__)
 db = MySQL()
 
 
-@datos_blue.route('/datos', methods=['GET', 'POST'])
+@datos_blue.route('/datos/<int:question_id>', methods=['GET', 'POST'])
 @login_required
-
     
-def datos():
-     
+def datos(question_id):
+          print(question_id)
           try:
+               
                global error
                error="cduco la sesion"
                Persona=[]
                Carrera=[]
-               cantidad=pandas.read_sql("select count(*) from registro ",db.connection)
-               Datafreresultado =pandas.read_sql("SELECT  FKresultado FROM registro ",db.connection)
-               abandono=pandas.read_sql("select count(*) FROM registro WHERE FKresultado = 0 ",db.connection)
-               graduado=pandas.read_sql("select count(*) FROM registro WHERE FKresultado = 1 ",db.connection)
-               carreradatoorginal=pandas.read_sql("select Carrera FROM registro ",db.connection)
-               datosgenreal=pandas.read_sql("SELECT  idRegistro,cedula,nombre,Carrera,FKresultado FROM registro",db.connection)
+               cantidad=pandas.read_sql("select count(*) from registro  where usuario='{}'""".format(question_id),db.connection)
+               Datafreresultado =pandas.read_sql("SELECT  FKresultado FROM registro where usuario='{}'""".format(question_id),db.connection)
+               abandono=pandas.read_sql("select count(*) FROM registro WHERE FKresultado = 0 and usuario='{}'""".format(question_id),db.connection)
+               graduado=pandas.read_sql("select count(*) FROM registro WHERE FKresultado = 1 and usuario='{}'""".format(question_id),db.connection)
+               carreradatoorginal=pandas.read_sql("select Carrera FROM registro where usuario='{}'""".format(question_id),db.connection)
+               datosgenreal=pandas.read_sql("SELECT  idRegistro,cedula,nombre,Carrera,FKresultado FROM registro  where usuario='{}'""".format(question_id),db.connection)
                carreradato=carreradatoorginal.drop_duplicates()
                
                cuenta_carrera = carreradatoorginal['Carrera'].value_counts()
@@ -39,12 +39,12 @@ def datos():
                
                     
                
-               estudiantes_nuevos=pandas.read_sql("select count(*) FROM registro ",db.connection)
-               Datafremenombre =pandas.read_sql("SELECT nombre FROM registro ",db.connection)
+               estudiantes_nuevos=pandas.read_sql("select count(*) FROM registro  where usuario='{}'""".format(question_id),db.connection)
+               Datafremenombre =pandas.read_sql("SELECT nombre FROM registro  where usuario='{}'""".format(question_id),db.connection)
 
                datos_estudiantes_nuevos=estudiantes_nuevos.loc[0, 'count(*)']
                datos_cantidad=cantidad.loc[0, 'count(*)']
-               Datafreresultadodos =pandas.read_sql("SELECT  Carrera FROM registro",db.connection)
+               Datafreresultadodos =pandas.read_sql("SELECT  Carrera FROM registro  where usuario='{}'""".format(question_id),db.connection)
                datos_abandono=abandono.loc[0,'count(*)']
                if datos_abandono==0 & datos_cantidad==0:
                     myRoundNumber=0
@@ -71,3 +71,4 @@ def datos():
           except ValueError:
                prediction="Error en el formato de los datos"
           return render_template("404.html", prediction=prediction,error=error)
+

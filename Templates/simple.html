@@ -27,6 +27,8 @@
 
     <!-- Main Sidebar Container -->
     {%include('partials/_navbar.html')%}
+   
+   
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -53,7 +55,8 @@
               <!-- /.card -->
 
               <div class="card">
-
+               
+                
                 <!-- /.card-header -->
                 <div class="card-body">
                   <table id="example1" class="table table-bordered table-striped">
@@ -68,15 +71,19 @@
                     </thead>
                     <tbody>
                       <tr>
-
+                         
+                       
+                        
                         {% for archivos in archivos %}
 
                         <td>{{archivos.nombre}}</td>
                         <td>{{archivos.fecha}}</td>
                         <td> <form action="/csv_descargar" method="POST">
                           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                          
                           <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name"
-                            name="csv">
+                          name="csv">
+                          
                           <input type="submit" value=CSV class="btn btn-warning">
 
                         </form></td>
@@ -87,13 +94,19 @@
 
                             <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name"
                               name="analizar">
+                           
+                              
                             <input type="submit" value=Analizar class="btn btn-success">
 
                           </form>
                           <form action="/Eliminar" method="POST">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            
                             <input type="hidden" value={{archivos.nombre}} class="form-control" placeholder="Full name"
                               name="eliminar">
+                            <input type="hidden" value={{current_user.id}} class="form-control" placeholder="Full name"
+                              name="usuario">
+                            
                             <input type="submit" value=Eliminar class="btn btn-danger">
 
                           </form>

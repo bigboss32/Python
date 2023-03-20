@@ -13,7 +13,7 @@ db = MySQL()
 
 @login_required
 def informe_indiv():
-    print(request.form['analizar'])
+
     nombre=request.form['analizar']
   
     Persona=[]
@@ -137,7 +137,12 @@ def informe_indiv():
 def Eliminar():
 
     nombre=request.form['eliminar']
-    file="Archivo/"+nombre
+    user=request.form['usuario']
+    print(user)
+    file="Archivo/"+user+"/"+nombre
+    print(file)
+  
+
     cursor = db.connection.cursor()
     sql=" DELETE FROM registro WHERE Numero_entrega ="+nombre[0]
     cursor.execute(sql)
@@ -145,4 +150,4 @@ def Eliminar():
     cursor.execute(sql)
     cursor.connection.commit()
     remove(file)
-    return redirect("/Historia_cvs")
+    return redirect("/Cargar_cvs")

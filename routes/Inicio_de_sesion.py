@@ -3,6 +3,7 @@ from flask_login import  login_user, logout_user, login_required
 from flask_mysqldb import MySQL
 from models.ModelUser import ModelUser
 from models.entities.User import User
+import pandas
 
 db = MySQL()
 
@@ -19,11 +20,13 @@ sesion_blue=Blueprint('Inicio_de_sesion',__name__)
 def login():
     if request.method == 'POST':
         user = User(0, request.form['username'], request.form['password'])
+        Datafremenombre =pandas.read_sql("SELECT * FROM user where username='{}'""".format(user.username) ,db.connection)
+        id=Datafremenombre.iloc[:, 0]
         logged_user = ModelUser.login(db, user)
         if logged_user != None:
             if logged_user.password:
                 login_user(logged_user)
-                return redirect("/datos")
+                return redirect(url_for('Datos.datos',question_id=id))
             else:
                 flash("Invalid password...")
                 return render_template('inicio.html',message=flash)

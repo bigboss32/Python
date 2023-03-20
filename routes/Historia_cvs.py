@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template
+from flask import Blueprint,render_template,request
 import os
 import time
 from models.entities.Archivo import Tree
@@ -7,12 +7,14 @@ from routes.Subir import comprobar
 historial_blue=Blueprint('Historia_cvs',__name__)
 
 
-@historial_blue.route('/Historia_cvs')
+@historial_blue.route('/Historia_cvs' ,methods=['POST','GET'])
 @login_required
 def historial():
-        comprobar()
+        
+        user=request.form["rr"]
+        comprobar(user)
         a=0
-        ejemplo_dir = 'Archivo'
+        ejemplo_dir = 'Archivo/'+user
         contenido = os.listdir(ejemplo_dir)
         archivos = []
         

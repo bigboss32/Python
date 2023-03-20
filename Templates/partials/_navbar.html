@@ -6,17 +6,19 @@
 
 
   <div class="sidebar">
-    
+
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
 
       <div class="info">
-        
-        {% if current_user.fullname  in current_user.fullname%}
+
+        {% if current_user.fullname in current_user.fullname%}
         <a href="#" class="d-block"> {{ current_user.fullname }}</a>
         <a class="btn btn-danger" href="/logout">Cerrar sesion</a>
         {%else%}
         <a class="btn btn-danger" href="/logout">login</a>
         {% endif %}
+
+        
       </div>
     </div>
 
@@ -29,7 +31,7 @@
 
 
         <li class="nav-item">
-          <a href="/datos" class="nav-link">
+          <a href={{ url_for('Datos.datos', question_id=current_user.id)}} class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>
               Menu
@@ -47,7 +49,7 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-           
+
             <li class="nav-item">
               <a href="/Historia_usuarios" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
@@ -82,13 +84,18 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/Historia_cvs" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>
-                  Historial CVS
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
+              <form action="\Historia_cvs" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <input type="hidden" value={{current_user.id}} name="rr" >
+              
+                  <p>
+                    <input type="submit" type="color" class="btn btn-success" value="HIstorias CSV">
+                  
+
+                  </p>
+                </a>
+              </form>
             </li>
           </ul>
         </li>
