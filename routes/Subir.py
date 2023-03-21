@@ -71,38 +71,39 @@ def Subir():
                                                             ,'SEXO','ESTRATO']]
                         data_final.insert(loc = 0 , column = 'numero_entrega', value = max_entrega+1)
 
-                    
-                            
-                        
 
 
+                        dfFiltro["EDAD_DE_INGRESO"]=dfFiltro["EDAD_DE_INGRESO"].astype(int) 
+                        dfFiltro["EDAD_DE_INGRESO"]=pandas.cut(dfFiltro["EDAD_DE_INGRESO"],[0,18,24,34,44,54],labels=[0,1,2,3,4])
+                        dfFiltro["EDAD_DE_INGRESO"]=dfFiltro["EDAD_DE_INGRESO"].astype(int) 
 
+                        #Convertir en columna categorica en columna entera Sexo Biologico
+                        dfFiltro.loc[dfFiltro.SEXO=='M','SEXO']=1
+                        dfFiltro.loc[dfFiltro.SEXO=='F','SEXO']=0
+                        dfFiltro["SEXO"]= dfFiltro["SEXO"].astype(int) 
 
-
-                        dfFiltro['EDAD_DE_INGRESO']=dfFiltro['EDAD_DE_INGRESO'].astype(int) 
-                        dfFiltro['EDAD_DE_INGRESO']=pandas.cut(dfFiltro['EDAD_DE_INGRESO'],[0,18,24,34,44,54],labels=[0,1,2,3,4])
-                        dfFiltro['EDAD_DE_INGRESO']=dfFiltro['EDAD_DE_INGRESO'].astype(int) 
-                                #Columna de Sexo 
-                        dfFiltro.SEXO.replace(['M', 'F'],[1,0], inplace=True)
-
-                        dfFiltro.Actualmente_trabaja.replace(['Sí', 'No'],[1,0], inplace=True)
                         dfFiltro.Tipo_de_población_a_la_que_pertenece.replace(["Urbana","Rural"],[1,0], inplace=True)
 
-                        dfFiltro["ESTADO_CIVIL"].replace(['Soltero', 'Unión Libre', 'Madre soltera', 'Casado', 'Religioso','Divorciado'],[0,1,2,3,4,5], inplace=True)
+                        dfFiltro["ESTADO_CIVIL"].replace(['Soltero', 'Unión Libre', 'Madre soltera', 'Casado', 'Religioso','Divorciado','Viudo', 'No definido'],[0,1,2,3,4,5,6,7], inplace=True)
+                                                                                                                                
+
+                        dfFiltro.Actualmente_trabaja.replace(['Sí', 'No'],[1,0], inplace=True)
+
 
                         dfFiltro['¿Cómo_financia_sus_estudios?'].replace(['Familia', 'Crédito', 'Recursos Propios', 'Beca'],[0,1,2,3], inplace=True)
 
                         dfFiltro['CIRCUNSCRIPCION'].replace(['REGULAR PREGRADO', 'DESPLAZADO', 'PUEBLO INDIGENA',
-                                                                    'COMUNIDAD NEGRA', 'VICTIMA DEL CONFLICTO ARMADO INTERNO'],
-                                                                    [0,1,2,3,4], inplace=True)
+                                                            'COMUNIDAD NEGRA', 'VICTIMA DEL CONFLICTO ARMADO INTERNO',
+                                                            'DEPORTISTAS CON RECONOCIMIENTOS DEPORTIVOS OFICIALES','CONVENIO 031 - ARTICULACIÓN'],
+                                                            [0,1,2,3,4,5,6], inplace=True)
 
-                                # Columna de Estrato 
+                                                            
+
+                        
 
                         dfFiltro['¿Dispone_de_un_computador_permanentemente?'].replace(['Sí', 'No'],[1,0], inplace=True)
 
                         dfFiltro['¿Posee_conexión_permanente_a_internet?'].replace(['Sí', 'No'],[1,0], inplace=True)
-
-                    
 
 
                       
