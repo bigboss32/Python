@@ -67,7 +67,7 @@ def datos(question_id):
 
                jsonabandono = json.dumps({'salary': int(datos_abandono)})
                jsongraduado = json.dumps({'salary': int(datos_graduado)})
-               return render_template("index3.html",data=Persona,catidad_estu=datos_cantidad,abandonos=datos_abandono,graduado=datos_graduado,abandono_in=indice_abandono,nuevos=nuevos,a=jsonabandono,g=jsongraduado,datoscarrea=Carrera)
+               return render_template("index3.html",data=Persona,catidad_estu=datos_cantidad,abandonos=datos_abandono,graduado=datos_graduado,abandono_in=indice_abandono,nuevos=nuevos,a=jsonabandono,g=jsongraduado,datoscarrea=Carrera,usu=question_id)
           except ValueError:
                prediction="Error en el formato de los datos"
           return render_template("404.html", prediction=prediction,error=error)

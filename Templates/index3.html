@@ -7,7 +7,8 @@
   <title>Inteligenci artificial|</title>
 
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
   <link rel="stylesheet" href="static\plugins\fontawesome-free\css\all.min.css">
 
@@ -22,16 +23,18 @@
 
 
 
-  <link rel="stylesheet" href= "{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
-  <link rel="stylesheet" href= "{{ url_for('static', filename='dist/css/adminlte.min.css') }}">
-  <link rel="stylesheet" href= "{{ url_for('static', filename='plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href= "{{ url_for('static', filename='plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href= "{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
-  <link rel="stylesheet" href= "{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}">
-  <link rel="stylesheet" href= "{{ url_for('static', filename='dist/js/pages/dashboard3.js') }}">
-  <link rel="stylesheet" href= "{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}">
-  <link rel="stylesheet" href= "{{ url_for('static', filename='dist/js/adminlte.js') }}">
-  <link rel="stylesheet" href= "{{ url_for('static', filename='plugins/chart.js/Chart.min.js') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet"
+    href="{{ url_for('static', filename='plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet"
+    href="{{ url_for('static', filename='plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/js/pages/dashboard3.js') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/js/adminlte.js') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/chart.js/Chart.min.js') }}">
 
 
 </head>
@@ -102,7 +105,8 @@
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+              
+              
               </div>
             </div>
 
@@ -117,7 +121,7 @@
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
+             
               </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -131,7 +135,7 @@
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
+     
               </div>
             </div>
 
@@ -146,18 +150,18 @@
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
+               
               </div>
 
             </div>
             <div class="row">
-              
+
               <div class="card-body">
                 <div class="row justify-content-between">
                   <div class="col-1">
 
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    
+
                     <input type="hidden" value={{informe}} class="form-control" placeholder="Full name" name="abandono">
                     <input type="submit" value="Posible Abandono" class="btn btn-secondary">
 
@@ -174,14 +178,14 @@
                 </div>
                 <div class="card">
 
-                  
+
                   <div class="card-body table-responsive p-0" style="height: 550px; ">
                     <table id="myTable" class="table table-head-fixed text-nowrap">
                       <thead>
                         <tr>
                           <th>#</th>
                           <th>Nombre</th>
-                       
+
                           <th>Resultado</th>
                           <th>Accion</th>
 
@@ -193,20 +197,20 @@
                         <tr>
                           <td>{{data.id}}</td>
                           <td>{{data.nombre}}</td>
-                        
+
 
 
                           <td>
 
-                              {% if data.prediccion==0%}
-                                <div class="alert alert-secondary" role="alert">
-                                  Abandono
-                                </div>
-                              {%else%}
-                                <div class="alert alert-success" role="alert">
-                                  graduado
-                                </div>
-                              {% endif %}
+                            {% if data.prediccion==0%}
+                            <div class="alert alert-secondary" role="alert">
+                              Abandono
+                            </div>
+                            {%else%}
+                            <div class="alert alert-success" role="alert">
+                              graduado
+                            </div>
+                            {% endif %}
 
                           </td>
                           <td>
@@ -262,8 +266,10 @@
                             <th style="width: 20px">#</th>
                             <th>Carrera</th>
 
-                            <th style="width: 10x">Cantidad de estudiantes</th>
+                            <th style="width: 20px">Cantidad de estudiantes</th>
+                            <th style="width: 20px">Accion</th>
                           </tr>
+                          {% autoescape false %}
                           {% for datoscarrea in datoscarrea %}
 
                           <td>
@@ -277,7 +283,8 @@
                             <div class="alert alert-info" role="alert">
 
                               {{datoscarrea.nombre}}
-
+                            
+                              
                             </div>
                           </td>
 
@@ -286,10 +293,21 @@
                               {{datoscarrea.cantidad}}
                             </div>
                           </td>
+                          <td>
+                            <form action="/Estudiantes_carrera" method="POST">
+                              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                             
+                              <input type="hidden" name="carrera" value="{{ datoscarrea.nombre|safe }}">
+                              <input type="hidden" value={{usu}}  name="id">
+
+                              <input type="submit" value=ver class="btn btn-success">
+                            </form>
+                          </td>
                           </tr>
+
                           <tr>
                             {%endfor%}
-
+                            {% endautoescape %}
                             </tbody>
                       </table>
 
@@ -298,7 +316,7 @@
                   </div>
                 </div>
               </div>
-             
+            
 
 
             </div>
@@ -329,21 +347,22 @@
   <script type="text/javascript" src="{{url_for('static', filename='plugins/jquery/jquery.min.js')}}"></script>
 
   <script src="static\plugins\bootstrap\js\bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script type="text/javascript"
+    src="{{url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
   <script src="static\dist\js\adminlte.js"></script>
-   <script type="text/javascript" src="{{url_for('static', filename='dist/js/adminlte.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='dist/js/adminlte.js')}}"></script>
 
 
   <script src="static\plugins\chart.js\Chart.min.js"></script>
-     <script type="text/javascript" src="{{url_for('static', filename='plugins/chart.js/Chart.min.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='plugins/chart.js/Chart.min.js')}}"></script>
 
   <script src="static\dist\js\demo.js"></script>
   <script type="text/javascript" src="{{url_for('static', filename='dist/js/demo.js')}}"></script>
 
   <script src="static\dist\js\pages\dashboard3.js"></script>
 
- <script type="text/javascript" src="{{url_for('static', filename='dist/js/pages/dashboard3.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='dist/js/pages/dashboard3.js')}}"></script>
 
   <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
 

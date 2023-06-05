@@ -1,4 +1,4 @@
-class csv:
+class obj:
     def __init__(self, Carrera,nombre,cedula,edad_de_ingreso,Actualmente_trabaja,Tipo_de_población_a_la_que_pertenece,ESTADO_CIVIL,Cómo_financia_sus_estudios,CIRCUNSCRIPCION,Dispone_de_un_computador_permanentemente,Posee_conexión_permanente_a_internet,sexo,estrato,FKresultado):
         self.Carrera = Carrera  # kind is an attribute
         self.edad_de_ingreso = edad_de_ingreso

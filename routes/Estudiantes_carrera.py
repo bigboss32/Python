@@ -1,25 +1,27 @@
-from flask import Blueprint, request,redirect,render_template
-import os
-from werkzeug.utils import secure_filename
+from flask import Blueprint, request,render_template,redirect
+from os import remove
 from flask_login import login_required
 import pandas
 from flask_mysqldb import MySQL
-import joblib
-import numpy as np
+import json
+from models.entities.Persona import persona
+from models.entities.Carrera import carrera
+from models.entities.Encuestas import encuesta
 from models.entities.Descargar_csv import obj
-csv_descargar_blue = Blueprint('csv_descargar', __name__)
+Estudiantes_carrera_bleu = Blueprint('Estudiantes_carrera', __name__)
 db = MySQL()
-
-@csv_descargar_blue.route('/csv_descargar', methods=['POST'])
-    
+@Estudiantes_carrera_bleu.route('/Estudiantes_carrera',methods=['GET', 'POST'])
 @login_required
-def csv_descargar():
-    
-
-    datos=pandas.read_sql("SELECT * FROM registro_encuesta",db.connection)
+def Estudiantes_carrera():
+        
+ carrera=request.form["carrera"]
+ iduse=request.form["id"]   
+                
+ print(iduse)      
+ datos=pandas.read_sql("SELECT * FROM registro_encuesta WHERE carrera = '{}' AND usuario = {}".format(carrera, iduse),db.connection)
    
-    filas=[]
-    for i in range(len(datos)):
+ filas=[]
+ for i in range(len(datos)):
       
             
             filas.append(obj(
@@ -45,4 +47,4 @@ def csv_descargar():
 
             ))
             
-    return render_template("csv_descargar.html",filas=filas)
+ return render_template("Estudiantes_carrera.html",filas=filas,carrera=carrera)

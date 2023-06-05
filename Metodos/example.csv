@@ -1,16 +1,16 @@
 ,0
-nombre,Nombre 6753
-cedula,16842078
-Id_regsitro_encuesta,49832
-Carrera,ADMINISTRACIÓN FINANCIERA
-edad_de_ingreso,34
+nombre,Rhonda Mattson
+cedula,10000008
+Id_regsitro_encuesta,56583
+Carrera,TECNOLOGÍA EN CRIMINALISTICA
+edad_de_ingreso,37
 Actualmente_trabaja,Sí
 Tipo_de_población_a_la_que_pertenece,Urbana
-ESTADO_CIVIL,Divorciado
+ESTADO_CIVIL,Casado
 Cómo_financia_sus_estudios,Recursos Propios
 CIRCUNSCRIPCION,REGULAR PREGRADO
-Dispone_de_un_computador_permanentemente,No
+Dispone_de_un_computador_permanentemente,Sí
 Posee_conexión_permanente_a_internet,Sí
 sexo,M
-estrato,1
+estrato,2
 FKresultado,0
